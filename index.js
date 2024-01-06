@@ -2,7 +2,11 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+
 import Project from "./models/Project.js";
+import AdminUser from "./models/AdminUser.js";
 
 //Подключение к MangoDB
 mongoose
@@ -69,6 +73,88 @@ app.post("/projects", async (req, res) => {
     console.log(err);
     res.status(500).json({
       message: "Не удалось создать проект",
+    });
+  }
+});
+
+app.post("/register-admin", async (req, res) => {
+  try {
+    const password = req.body.password;
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
+
+    const doc = new AdminUser({
+      login: req.body.login,
+      password: hash,
+    });
+
+    const adminUser = await doc.save();
+
+    const token = jwt.sign(
+      {
+        _id: adminUser._id,
+      },
+      "secret123",
+      {
+        expiresIn: "30d",
+      }
+    );
+
+    const { passwordHash, ...userData } = adminUser._doc;
+
+    res.json({
+      ...adminUser._doc,
+      token,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      message: "Не удалось зарегестрироваться",
+    });
+  }
+});
+
+app.post("/login-admin", async (req, res) => {
+  try {
+    const admin = await AdminUser.findOne({ login: req.body.login });
+
+    if (!admin) {
+      return res.status(404).json({
+        message: "Email error",
+      });
+    }
+
+    const isValidPass = await bcrypt.compare(
+      req.body.password,
+      admin._doc.password
+    );
+
+    if (!isValidPass) {
+      return res.status(400).json({
+        message: "pass error",
+      });
+    }
+
+    const token = jwt.sign(
+      {
+        _id: admin._id,
+      },
+      "secret123",
+      {
+        expiresIn: "30d",
+      }
+    );
+
+    const { passwordHash, ...userData } = admin._doc;
+
+    res.json({
+      ...admin._doc,
+      token,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      message: "Не удалось авторизоваться",
     });
   }
 });
