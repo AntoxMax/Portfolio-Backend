@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 
 import { projectRoutes } from "./routes/projectRoutes.js";
 import { authRoutes } from "./routes/authRoutes.js";
+import { mainPageRoutes } from "./routes/mainPageRoutes.js";
 
 //Подключение к MangoDB
 mongoose
@@ -21,6 +22,7 @@ app.use(cors());
 // Routes
 projectRoutes(app);
 authRoutes(app);
+mainPageRoutes(app);
 
 //Настроили backend на 4444 порт
 app.listen(4444, (err) => {

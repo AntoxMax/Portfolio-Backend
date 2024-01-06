@@ -20,7 +20,7 @@ export const projectValidation = [
 
 export const mainPageValidation = [
   body("skills", "Укажите хотя бы один навык").isLength({ min: 1 }),
-  body(" text", "Текст должен быть минимум 5 символов").isLength({
+  body("text", "Текст должен быть минимум 5 символов").isLength({
     min: 5,
   }),
 ];

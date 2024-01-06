@@ -1,7 +1,7 @@
-import { ProjectsController } from "../controllers/index.js";
 import checkAuth from "../utils/checkAuth.js";
-import handleValidation from "../utils/handleValidation.js";
 import { projectValidation } from "../validation/validation.js";
+import handleValidation from "../utils/handleValidation.js";
+import { ProjectsController } from "../controllers/index.js";
 
 export const projectRoutes = (app) => {
   app.get("/projects", ProjectsController.getAllProjects);

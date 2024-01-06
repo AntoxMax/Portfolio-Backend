@@ -1,7 +1,7 @@
-import { AuthController } from "../controllers/index.js";
 import checkAuth from "../utils/checkAuth.js";
-import handleValidation from "../utils/handleValidation.js";
 import { authValidation } from "../validation/validation.js";
+import handleValidation from "../utils/handleValidation.js";
+import { AuthController } from "../controllers/index.js";
 
 export const authRoutes = (app) => {
   app.post(
