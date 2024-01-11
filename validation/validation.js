@@ -15,6 +15,9 @@ export const projectValidation = [
     })
     .isString(),
   body("skills", "Неверный формат (укажите массив)").optional(),
+  body("link", "Неверный формат ссылки").isURL().optional(),
+  body("gitHubLink", "Неверный формат ссылки").isURL().optional(),
+  body("skills", "Неверный формат (укажите массив)").optional(),
   body("imageUrl", "Неверная ссылка на изображение").optional().isString(),
 ];
 

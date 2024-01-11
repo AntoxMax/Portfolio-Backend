@@ -40,6 +40,8 @@ export const createProject = async (req, res) => {
       text: req.body.text,
       imageUrl: req.body.imageUrl,
       skills: req.body.skills,
+      link: req.body.link,
+      gitHubLink: req.body.gitHubLink,
     });
 
     const project = await doc.save();
@@ -66,6 +68,8 @@ export const updateProject = async (req, res) => {
       title: req.body.title,
       text: req.body.text,
       skills: req.body.skills,
+      link: req.body.link,
+      gitHubLink: req.body.gitHubLink,
       imageUrl: req.body.imageUrl,
     }
   )
