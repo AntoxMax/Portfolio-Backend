@@ -10,6 +10,10 @@ const ProjectSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    category: {
+      type: String,
+      required: true,
+    },
     skills: {
       type: Array,
       default: [],

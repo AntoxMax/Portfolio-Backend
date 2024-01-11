@@ -1,5 +1,21 @@
 import Project from "../models/Project.js";
 
+export const getProjectsCategory = async (req, res) => {
+  const category = req.query.category;
+
+  console.log("PARAMS: ", category);
+
+  try {
+    const projects = await Project.find({ category: category }).exec();
+    res.json(projects);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      message: "Не удалось получить проекты",
+    });
+  }
+};
+
 export const getAllProjects = async (req, res) => {
   try {
     const projects = await Project.find().exec();
@@ -38,6 +54,7 @@ export const createProject = async (req, res) => {
     const doc = new Project({
       title: req.body.title,
       text: req.body.text,
+      category: req.body.category,
       imageUrl: req.body.imageUrl,
       skills: req.body.skills,
       link: req.body.link,
