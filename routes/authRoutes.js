@@ -24,4 +24,6 @@ export const authRoutes = (app) => {
     handleValidation,
     AuthController.adminUpdateData
   );
+
+  app.get("/auth/me", checkAuth, AuthController.getUser);
 };

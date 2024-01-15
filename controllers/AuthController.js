@@ -1,4 +1,6 @@
 import AdminUser from "../models/AdminUser.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 export const adminRegister = async (req, res) => {
   try {
@@ -43,7 +45,7 @@ export const adminLogin = async (req, res) => {
 
     if (!admin) {
       return res.status(404).json({
-        message: "Email error",
+        message: "Login error",
       });
     }
 
@@ -128,4 +130,24 @@ export const adminUpdateData = async (req, res) => {
         message: "Не удалось обновить статью",
       });
     });
+};
+
+export const getUser = async (req, res) => {
+  try {
+    const user = await UserModel.findById(req.userId);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "Can't find user",
+      });
+    }
+    const { passwordHash, ...userData } = user._doc;
+
+    res.json({ userData });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      message: "Нет доступа",
+    });
+  }
 };
