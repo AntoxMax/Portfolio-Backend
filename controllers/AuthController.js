@@ -134,7 +134,7 @@ export const adminUpdateData = async (req, res) => {
 
 export const getUser = async (req, res) => {
   try {
-    const user = await UserModel.findById(req.userId);
+    const user = await AdminUser.findById(req.userId);
 
     if (!user) {
       return res.status(404).json({

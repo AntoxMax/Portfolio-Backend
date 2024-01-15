@@ -2,14 +2,23 @@ import mongoose from "mongoose";
 
 const MainPageSchema = new mongoose.Schema(
   {
-    skills: {
-      type: Array,
-      default: [],
+    firstBlock: {
+      title1: String,
+      title2: String,
+      imageUrl: String,
     },
+    skills: {},
     textAbotMe: {
-      type: String,
-      required: true,
+      text: String,
+      imageUrl: String,
     },
+    contacts: [
+      {
+        iconUrl: String,
+        textContact: String,
+        urlContact: String,
+      },
+    ],
   },
   {
     timestamps: true,

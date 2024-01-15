@@ -25,5 +25,5 @@ export const authRoutes = (app) => {
     AuthController.adminUpdateData
   );
 
-  app.get("/auth/me", checkAuth, AuthController.getUser);
+  app.get("/admin/getAuth", checkAuth, AuthController.getUser);
 };
