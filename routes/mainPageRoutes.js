@@ -4,13 +4,13 @@ import handleValidation from "../utils/handleValidation.js";
 import { MainPageController } from "../controllers/index.js";
 
 export const mainPageRoutes = (app) => {
-  app.get("/mainpage", MainPageController.getContent);
+  app.get("/mainpage", MainPageController.default);
   // TODO: Сделать роут для обновление контента
   app.post(
     "/mainpage",
     checkAuth,
-    mainPageValidation,
-    handleValidation,
+    // mainPageValidation,
+    // handleValidation,
     MainPageController.updateContent
   );
 };

@@ -8,7 +8,7 @@ const MainPageSchema = new mongoose.Schema(
       imageUrl: String,
     },
     skills: {},
-    textAbotMe: {
+    textAboutMe: {
       text: String,
       imageUrl: String,
     },

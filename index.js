@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 import { projectRoutes } from "./routes/projectRoutes.js";
 import { authRoutes } from "./routes/authRoutes.js";
 import { mainPageRoutes } from "./routes/mainPageRoutes.js";
-import { uploadRoute } from "./routes/uploarRoute.js";
+import { uploadRoute } from "./routes/uploadRoute.js";
 
 //Подключение к MangoDB
 mongoose

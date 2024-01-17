@@ -15,7 +15,7 @@ export const uploadRoute = (app) => {
 
   app.post("/upload", checkAuth, upload.single("image"), (req, res) => {
     res.json({
-      url: `/uploads/${req.file.originalname}`,
+      url: `http://localhost:4444/uploads/${req.file.originalname}`,
     });
   });
 };

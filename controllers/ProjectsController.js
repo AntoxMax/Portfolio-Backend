@@ -84,6 +84,7 @@ export const updateProject = async (req, res) => {
     {
       title: req.body.title,
       text: req.body.text,
+      category: req.body.category,
       skills: req.body.skills,
       link: req.body.link,
       gitHubLink: req.body.gitHubLink,
