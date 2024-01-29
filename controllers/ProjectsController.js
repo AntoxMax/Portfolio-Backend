@@ -58,7 +58,7 @@ export const createProject = async (req, res) => {
       imageUrl: req.body.imageUrl,
       skills: req.body.skills,
       link: req.body.link,
-      gitHubLink: req.body.gitHubLink,
+      gitLink: req.body.gitLink,
     });
 
     const project = await doc.save();
@@ -76,6 +76,7 @@ export const createProject = async (req, res) => {
 
 export const updateProject = async (req, res) => {
   const projectId = req.params.id;
+  console.log("On updating");
 
   await Project.updateOne(
     {
@@ -97,6 +98,7 @@ export const updateProject = async (req, res) => {
           message: "Статья не найдена",
         });
       }
+      console.log("updated");
 
       res.json(doc);
     })

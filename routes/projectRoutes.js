@@ -21,11 +21,5 @@ export const projectRoutes = (app) => {
     handleValidation,
     ProjectsController.updateProject
   );
-  app.delete(
-    "/projects/:id",
-    checkAuth,
-    projectValidation,
-    handleValidation,
-    ProjectsController.deleteProject
-  );
+  app.delete("/projects/:id", checkAuth, ProjectsController.deleteProject);
 };

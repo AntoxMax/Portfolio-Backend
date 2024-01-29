@@ -86,6 +86,22 @@ export const adminLogin = async (req, res) => {
 
 export const adminUpdateData = async (req, res) => {
   const token = (req.headers.authorization || "").replace(/Bearer\s?/, "");
+  const id = req.params.id;
+  const admin = await AdminUser.findOne({ _id: id });
+
+  const isValidPass = await bcrypt.compare(
+    req.body.oldPass,
+    admin._doc.password
+  );
+
+  console.log(admin._doc.password);
+  console.log(isValidPass);
+
+  if (!isValidPass) {
+    return res.status(400).json({
+      message: "pass error",
+    });
+  }
 
   const password = req.body.password;
   const salt = await bcrypt.genSalt(10);
@@ -93,7 +109,7 @@ export const adminUpdateData = async (req, res) => {
 
   await AdminUser.updateOne(
     {
-      _id: adminId,
+      _id: id,
     },
     {
       login: req.body.login,
@@ -109,7 +125,7 @@ export const adminUpdateData = async (req, res) => {
 
       const token = jwt.sign(
         {
-          _id: adminId,
+          _id: req.body.id,
         },
         "secret123",
         {
@@ -141,9 +157,12 @@ export const getUser = async (req, res) => {
         message: "Can't find user",
       });
     }
+
+    console.log(user);
+
     const { passwordHash, ...userData } = user._doc;
 
-    res.json({ userData });
+    res.json({ user });
   } catch (err) {
     console.log(err);
     res.status(500).json({

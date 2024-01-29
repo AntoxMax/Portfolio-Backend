@@ -7,7 +7,12 @@ const MainPageSchema = new mongoose.Schema(
       title2: String,
       imageUrl: String,
     },
-    skills: {},
+    skills: [
+      {
+        title: String,
+        skills: Array,
+      },
+    ],
     textAboutMe: {
       text: String,
       imageUrl: String,

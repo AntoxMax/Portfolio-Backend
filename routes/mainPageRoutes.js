@@ -5,12 +5,10 @@ import { MainPageController } from "../controllers/index.js";
 
 export const mainPageRoutes = (app) => {
   app.get("/mainpage", MainPageController.default);
-  // TODO: Сделать роут для обновление контента
-  app.post(
+  app.patch(
     "/mainpage",
     checkAuth,
-    // mainPageValidation,
-    // handleValidation,
+    handleValidation,
     MainPageController.updateContent
   );
 };

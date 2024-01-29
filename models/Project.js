@@ -21,7 +21,7 @@ const ProjectSchema = new mongoose.Schema(
     link: {
       type: String,
     },
-    gitHubLink: {
+    gitLink: {
       type: String,
     },
     imageUrl: String,
