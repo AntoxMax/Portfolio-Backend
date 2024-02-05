@@ -3,8 +3,6 @@ import Project from "../models/Project.js";
 export const getProjectsCategory = async (req, res) => {
   const category = req.query.category;
 
-  console.log("PARAMS: ", category);
-
   try {
     const projects = await Project.find({ category: category }).exec();
     res.json(projects);
@@ -76,7 +74,6 @@ export const createProject = async (req, res) => {
 
 export const updateProject = async (req, res) => {
   const projectId = req.params.id;
-  console.log("On updating");
 
   await Project.updateOne(
     {
@@ -88,24 +85,23 @@ export const updateProject = async (req, res) => {
       category: req.body.category,
       skills: req.body.skills,
       link: req.body.link,
-      gitHubLink: req.body.gitHubLink,
+      gitLink: req.body.gitLink,
       imageUrl: req.body.imageUrl,
     }
   )
     .then((doc) => {
       if (!doc) {
         return res.status(404).json({
-          message: "Статья не найдена",
+          message: "Проект не найден",
         });
       }
-      console.log("updated");
 
       res.json(doc);
     })
     .catch((err) => {
       console.log(err);
       res.status(500).json({
-        message: "Не удалось обновить статью",
+        message: "Не удалось обновить проект",
       });
     });
 };
@@ -117,7 +113,7 @@ export const deleteProject = async (req, res) => {
     .then((doc) => {
       if (!doc) {
         return res.status(404).json({
-          message: "Проект не найдена",
+          message: "Проект не найден",
         });
       }
 
@@ -128,7 +124,7 @@ export const deleteProject = async (req, res) => {
     .catch((err) => {
       console.log(err);
       return res.status(500).json({
-        message: "Не удалось удалить",
+        message: "Не удалось удалить проект",
       });
     });
 };

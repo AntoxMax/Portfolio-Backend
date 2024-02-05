@@ -45,7 +45,7 @@ export const adminLogin = async (req, res) => {
 
     if (!admin) {
       return res.status(404).json({
-        message: "Login error",
+        message: "Ошибка логина",
       });
     }
 
@@ -56,7 +56,7 @@ export const adminLogin = async (req, res) => {
 
     if (!isValidPass) {
       return res.status(400).json({
-        message: "pass error",
+        message: "Ошибка пароля",
       });
     }
 
@@ -94,12 +94,9 @@ export const adminUpdateData = async (req, res) => {
     admin._doc.password
   );
 
-  console.log(admin._doc.password);
-  console.log(isValidPass);
-
   if (!isValidPass) {
     return res.status(400).json({
-      message: "pass error",
+      message: "Ошибка пароля",
     });
   }
 
@@ -119,7 +116,7 @@ export const adminUpdateData = async (req, res) => {
     .then((doc) => {
       if (!doc) {
         return res.status(404).json({
-          message: "Статья не найдена",
+          message: "Пользователь не найден",
         });
       }
 
@@ -143,7 +140,7 @@ export const adminUpdateData = async (req, res) => {
     .catch((err) => {
       console.log(err);
       res.status(500).json({
-        message: "Не удалось обновить статью",
+        message: "Не удалось обновить пользователя",
       });
     });
 };
@@ -154,11 +151,9 @@ export const getUser = async (req, res) => {
 
     if (!user) {
       return res.status(404).json({
-        message: "Can't find user",
+        message: "Не удалось найти пользователя",
       });
     }
-
-    console.log(user);
 
     const { passwordHash, ...userData } = user._doc;
 

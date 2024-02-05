@@ -8,7 +8,7 @@ export default async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      message: "Не удалось получить проекты",
+      message: "Не удалось получить контент",
     });
   }
 };
@@ -28,7 +28,7 @@ export const updateContent = async (req, res) => {
     .catch((err) => {
       console.log(err);
       res.status(500).json({
-        message: "Не удалось получить проекты",
+        message: "Не удалось обновить контент",
       });
     });
   const content = await MainPage.find().exec();
